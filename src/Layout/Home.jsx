@@ -3,8 +3,10 @@ import CallUs from "../Components/home/CallUs";
 import CategorySwiper from "../Components/home/CategorySwiper";
 import CategorySwiperJs from "../Components/home/CategorySwiperJs";
 import ChefRecommends from "../Components/home/ChefRecommends";
+import FromMenu from "../Components/home/FromMenu";
 import HomeBanner from "../Components/home/HomeBanner";
 import ReactSliderBanner from "../Components/home/ReactSliderBanner";
+import Testimonials from "../Components/home/Testimonials";
 
 const Home = () => {
   return (
@@ -14,8 +16,10 @@ const Home = () => {
       {/* <CategorySwiper /> */}
       <CategorySwiperJs />
       <Banner />
+      <FromMenu />
       <CallUs />
       <ChefRecommends />
+      <Testimonials />
     </div>
   );
 };
