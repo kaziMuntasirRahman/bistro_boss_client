@@ -1,0 +1,32 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", serif;
+}
+
+.font-Cinzel {
+  font-family: "Cinzel", serif;
+  font-optical-sizing: auto;
+}
+
+.activeNavLink {
+  @apply text-[#eeff25] text-xl font-extrabold uppercase
+}
+
+.pendingNavLink {
+  @apply text-white text-xl font-extrabold uppercase
+}
+
+.inActiveNavLink {
+  @apply text-white text-xl font-extrabold uppercase
+}
+
+.banner img {
+  @apply w-full;
+}
