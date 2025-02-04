@@ -5,6 +5,7 @@ import CategorySwiperJs from "../Components/home/CategorySwiperJs";
 import ChefRecommends from "../Components/home/ChefRecommends";
 import FromMenu from "../Components/home/FromMenu";
 import HomeBanner from "../Components/home/HomeBanner";
+import MenuBanner from "../Components/home/MenuBanner";
 import ReactSliderBanner from "../Components/home/ReactSliderBanner";
 import Testimonials from "../Components/home/Testimonials";
 
@@ -19,6 +20,7 @@ const Home = () => {
       <FromMenu />
       <CallUs />
       <ChefRecommends />
+      <MenuBanner />
       <Testimonials />
     </div>
   );
