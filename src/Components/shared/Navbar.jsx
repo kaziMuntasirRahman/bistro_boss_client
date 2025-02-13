@@ -5,8 +5,8 @@ const Navbar = () => {
     {
       title: 'Home',
       link: '/',
-      icon: 'home-icon', // optional, just an example of additional info
-      isVisible: true,   // another example for future flexibility
+      icon: 'home-icon',
+      isVisible: true,
     },
     {
       title: 'Contact Us',
@@ -84,10 +84,11 @@ const Navbar = () => {
             >{navLink.title}</NavLink>
           )}
           <div>
-            <img className="h-[43px] mr-5" src="assets/icons/shopping-cart-favicon.png" />
+            <img className="h-[43px] mr-5" src="/assets/icons/shopping-cart-favicon.png" />
           </div>
         </ul>
-        <button className="btn btn-md btn-outline btn-secondary">Login</button>
+        <Link to="/login" className="h-16 px-[30px] py-5  rounded-lg border-b-2 border-[#ebf0f7] justify-start items-start gap-2.5 inline-flex uppercase text-[#ebf0f7] text-xl font-medium font-['Inter'] mt-6 mb-8 hover:bg-[#1F2937] hover:text-white hover:border-slate-400 transition-all ease-in-out duration-300">Login</Link>
+        {/* <button className="btn btn-md btn-outline btn-secondary">Login</button> */}
       </div>
     </nav>
   );

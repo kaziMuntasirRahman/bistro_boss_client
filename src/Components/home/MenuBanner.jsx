@@ -2,10 +2,10 @@ import SectionHeading from "./SectionHeading";
 
 const MenuBanner = () => {
   return (
-<div className="w-full h-[848px] bg-[url(assets/home/featured.jpg)] bg-cover bg-center bg-black/50 bg-blend-overlay py-[130px] text-white mb-[130px]">
-<SectionHeading heading="From Our Menu" title="Check it out" theme="dark" />
+    <div className="w-full h-[848px] bg-fixed bg-[url(/assets/home/featured.jpg)] bg-cover bg-center bg-black/50 bg-blend-overlay py-[130px] text-white mb-[130px]">
+      <SectionHeading heading="From Our Menu" title="Check it out" theme="dark" />
       <div className="w-[1320px] mx-auto flex items-center gap-16">
-        <img src="assets/home/featured.jpg" className="w-[648px]" />
+        <img src="/assets/home/featured.jpg" className="w-[648px]" />
         <section className="flex flex-col items-start">
           <h4 className="text-2xl font-normal font-['Inter'] leading-9">March 20, 2025</h4>
           <h2 className="text-2xl uppercase font-normal font-['Inter'] leading-9">Where Can I Get Some?</h2>

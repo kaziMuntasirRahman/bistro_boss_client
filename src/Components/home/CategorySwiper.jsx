@@ -2,23 +2,23 @@ import { Carousel } from "react-responsive-carousel";
 
 const images = [
   {
-    link: "assets/home/slide1.jpg",
+    link: "/assets/home/slide1.jpg",
     text: "Salad"
   },
   {
-    link: "assets/home/slide2.jpg",
+    link: "/assets/home/slide2.jpg",
     text: "Pizza"
   },
   {
-    link: "assets/home/slide3.jpg",
+    link: "/assets/home/slide3.jpg",
     text: "Soup"
   },
   {
-    link: "assets/home/slide4.jpg",
+    link: "/assets/home/slide4.jpg",
     text: "Cake"
   },
   {
-    link: "assets/home/slide5.jpg",
+    link: "/assets/home/slide5.jpg",
     text: "Curry"
   }
 ];

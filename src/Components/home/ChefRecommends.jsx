@@ -9,7 +9,7 @@ const ChefRecommends = () => {
           Array(3).fill().map((index) =>
             <Cart
               key={index}
-              img="assets/home/slide5.jpg"
+              img="/assets/home/slide5.jpg"
               head="Caesar Salad"
               details="Lettuce, Eggs, Parmesan Cheese, Chicken Breast Fillets."
             />

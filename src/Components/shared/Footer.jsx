@@ -13,9 +13,9 @@ const Footer = () => {
           <div className="text-[32px] font-medium font-['Inter'] mb-6">FOLLOW US</div>
           <div className="w-[345px] text-xl font-medium font-['Inter'] leading-9">Join us on social media</div>
           <div className="flex gap-8 mt-8">
-            <img src="assets/social icons/facebook.png" />
-            <img src="assets/social icons/instagram.png" />
-            <img src="assets/social icons/twitter.png" />
+            <img src="/assets/social icons/facebook.png" />
+            <img src="/assets/social icons/instagram.png" />
+            <img src="/assets/social icons/twitter.png" />
           </div>
         </div>
       </section>

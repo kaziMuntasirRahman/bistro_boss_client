@@ -11,6 +11,6 @@ Bistro Boss is a comprehensive restaurant management website built using the MER
 - <b>Staff Management</b>: Manage staff roles and schedules.
 - <b>Dashboard:</b> Overview of key metrics and restaurant performance.
 
-## Landing Page Structucture
+## Landing Page Structure
 
 <img src="./landing-structure.png">

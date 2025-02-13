@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Banner from "../Components/home/Banner";
 import CallUs from "../Components/home/CallUs";
 import CategorySwiper from "../Components/home/CategorySwiper";
@@ -12,6 +13,10 @@ import Testimonials from "../Components/home/Testimonials";
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>Bistro Boss | Home</title>
+        {/* <link rel="canonical" href="https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-512.png" /> */}
+      </Helmet>
       {/* <HomeBanner /> */}
       <ReactSliderBanner />
       {/* <CategorySwiper /> */}

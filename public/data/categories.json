@@ -1,0 +1,37 @@
+[
+  {
+    "index": 0,
+    "name": "Salad",
+    "category": "salad"
+  },
+  {
+    "index": 1,
+    "name": "Pizza",
+    "category": "pizza"
+  },
+  {
+    "index": 2,
+    "name": "Soups",
+    "category": "soup"
+  },
+  {
+    "index": 3,
+    "name": "Desserts",
+    "category": "dessert"
+  },
+  {
+    "index": 4,
+    "name": "Drinks",
+    "category": "drinks"
+  },
+  {
+    "index": 5,
+    "name": "Popular Dish",
+    "category": "popular"
+  },
+  {
+    "index": 6,
+    "name": "Special Offer",
+    "category": "offered"
+  }
+]

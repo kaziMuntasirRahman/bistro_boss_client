@@ -4,7 +4,7 @@ import Footer from "../Components/shared/Footer";
 
 const Root = () => {
   return (
-    <div className="">
+    <div className="min-h-screen">
       <Navbar />
       <Outlet />
       <Footer />

@@ -1,10 +1,10 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { Swiper, SwiperSlide } from 'swiper/react';
 // import required modules
+import { useEffect, useState } from 'react';
 import { Navigation } from 'swiper/modules';
 import SectionHeading from "./SectionHeading";
-import { useEffect, useState } from 'react';
 
 const testimonials = [
   {
@@ -42,13 +42,13 @@ const testimonials = [
 
 const Testimonials = () => {
 
-const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState([]);
 
-useEffect(()=>{
-  fetch('data/reviews.json')
-  .then(res=>res.json())
-  .then(data=>setReviews(data))
-}, [])
+  useEffect(() => {
+    fetch('/data/reviews.json')
+      .then(res => res.json())
+      .then(data => setReviews(data))
+  }, [])
 
   return (
     <div className="w-[1320px] mx-auto flex flex-col items-center mb-[130px]">
@@ -74,16 +74,16 @@ const Slider = ({ array }) => {
               <section className="flex gap-[5px] items-center justify-center mx-auto">
                 {
                   Array(critic.rating).fill().map((index) =>
-                    <img src="assets/icons/filled_star.png" key={index} />
+                    <img src="/assets/icons/filled_star.png" key={index} />
                   )
                 }
                 {
                   Array(5 - critic.rating).fill().map((index) =>
-                    <img src="assets/icons/empty_star.png" key={index} />
+                    <img src="/assets/icons/empty_star.png" key={index} />
                   )
                 }
               </section>
-              <img className="mt-12 mb-10" src="assets/icons/quote-left 1.png" />
+              <img className="mt-12 mb-10" src="/assets/icons/quote-left 1.png" />
               <p className="w-[1096px] text-center text-[#444444] text-xl font-normal font-['Inter'] leading-[35px] mb-2">{critic.details}</p>
               <div className="text-center text-[#cd9002] text-[32px] font-medium font-['Inter'] uppercase">{critic.name}</div>
             </div>

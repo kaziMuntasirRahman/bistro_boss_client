@@ -6,28 +6,29 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 // import required modules
+import { Link } from 'react-router-dom';
 import { Pagination } from 'swiper/modules';
 import SectionHeading from './SectionHeading';
 
 const images = [
   {
-    link: "assets/home/slide1.jpg",
+    link: "/assets/home/slide1.jpg",
     text: "Salad"
   },
   {
-    link: "assets/home/slide2.jpg",
+    link: "/assets/home/slide2.jpg",
     text: "Pizza"
   },
   {
-    link: "assets/home/slide3.jpg",
+    link: "/assets/home/slide3.jpg",
     text: "Soup"
   },
   {
-    link: "assets/home/slide4.jpg",
-    text: "Cake"
+    link: "/assets/home/slide4.jpg",
+    text: "Drinks"
   },
   {
-    link: "assets/home/slide5.jpg",
+    link: "/assets/home/slide5.jpg",
     text: "Desert"
   }
 ];
@@ -51,13 +52,13 @@ const CategorySwiperJs = () => {
       >
         {
           images.map((image, index) =>
-            <SwiperSlide>
-              <div className='w-[312px] h-[500px]'>
+            <SwiperSlide key={index}>
+              <Link to={`shop/${image.text.toLowerCase()}`} className='w-[312px] h-[500px]'>
                 <div className='relative'>
-                  <img className="w-full h-[450px]" src={image.link} key={index} alt={"Slide " + index + 1} />
+                  <img className="w-full h-[450px]" src={image.link} alt={"Slide " + index + 1} />
                   <h1 className="text-white text-[32px] font-normal font-['Cinzel'] absolute left-1/2 -translate-x-1/2 bottom-6 ">{image.text}</h1>
                 </div>
-              </div>
+              </Link>
             </SwiperSlide>
           )
         }
