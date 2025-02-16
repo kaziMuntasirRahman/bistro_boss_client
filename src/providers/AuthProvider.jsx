@@ -1,4 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import auth from '../firebase/firebase.config'
 
 export const AuthContext = createContext(null);
 
@@ -6,11 +8,74 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true)
 
+  // on auth state changed manage
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+        console.log("User is present as: " + currentUser.displayName)
+        // console.log(currentUser)
+      } else {
+        setUser(null)
+        console.log("User is absent");
+      }
+      setLoading(false);
+    })
+    return () => unsubscribe();
+  }, [])
+
+  // create new user
+  const createUser = async (name, email, password) => {
+    try {
+      setLoading(true);
+      const credentials = await createUserWithEmailAndPassword(auth, email, password)
+      await updateProfile(auth.currentUser, { displayName: name, photoURL: "https://www.shareicon.net/data/512x512/2016/09/15/829466_man_512x512.png" })
+      return credentials;
+    }
+    catch (err) {
+      setLoading(false)
+      console.log(err)
+      return err;
+    }
+  }
+
+  // sign in user
+  const logIn = async (email, password) => {
+    setLoading(true)
+    try {
+      const credentials = await signInWithEmailAndPassword(auth, email, password)
+      return credentials;
+    }
+    catch (err) {
+      console.log(err)
+      return err;
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // signout user
+  const logOut = async () => {
+    setLoading(true)
+    try {
+      await signOut(auth);
+      return true;
+    } catch (err) {
+      console.log(err);
+      return err;
+    } finally {
+      setLoading(false);
+    }
+  }
+
   const authInfo = {
     user,
-    setUser,
     loading,
-    setLoading
+    setUser,
+    setLoading,
+    createUser,
+    logIn,
+    logOut
   };
 
   return (

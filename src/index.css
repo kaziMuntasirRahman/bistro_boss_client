@@ -38,4 +38,3 @@
 .tab-active {
   @apply text-[#bb8405] text-2xl font-bold font-['Inter'] uppercase pb-10 border-b-[4px] !border-[#bb8405];
 }
-

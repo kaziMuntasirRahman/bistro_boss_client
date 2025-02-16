@@ -8,6 +8,7 @@ import ContactUs from "../pages/ContactUs";
 import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import PrivateRouter from "../pages/PrivateRouter";
 
 const router = createBrowserRouter([
   {
@@ -36,10 +37,6 @@ const router = createBrowserRouter([
         element: <ContactUs />
       },
       {
-        path: '/dashboard',
-        element: <Dashboard />
-      },
-      {
         path: '/login',
         element: <Login />
       },
@@ -48,7 +45,13 @@ const router = createBrowserRouter([
         element: <Register />
       }
     ]
-  }
+  },
+  {
+    path: '/dashboard',
+    element: <Dashboard />,
+    errorElement: <ErrorPage />,
+    children: []
+  },
 ])
 
 export default router;

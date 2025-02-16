@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.66.0",
+    "axios": "^1.7.9",
     "firebase": "^11.3.1",
     "localforage": "^1.10.0",
     "match-sorter": "^8.0.0",
@@ -23,10 +25,12 @@
     "react-simple-captcha": "^9.3.1",
     "simple-parallax-js": "^6.0.1",
     "sort-by": "^1.2.0",
+    "sweetalert2": "^11.16.0",
     "swiper": "^11.2.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
+    "@tanstack/eslint-plugin-query": "^5.66.1",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",

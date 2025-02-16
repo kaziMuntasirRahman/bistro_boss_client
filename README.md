@@ -4,14 +4,13 @@ Bistro Boss is a comprehensive restaurant management website built using the MER
 
 ## Features
 
-- <b>User Authentication </b>: Secure login and registration using JWT.
-- <b>Reservation Management</b>: View, create, and manage customer reservations.
-- <b>Order Management</b>: Track and manage orders in real-time.
+- **User Authentication**: Secure login and registration using JWT.
+- **Reservation Management**: View, create, and manage customer reservations.
+- **Order
 - <b>Menu Management</b>: Add, update, and remove menu items.
 - <b>Staff Management</b>: Manage staff roles and schedules.
 - <b>Dashboard:</b> Overview of key metrics and restaurant performance.
 
 ## Landing Page Structure
-
-<img src="public/assets/landing-structure.jpeg">
-<img src="public/assets/Bistro boss Landing Page Design.png">
+<!-- <img src="public/assets/landing-structure.jpeg"> -->
+<img src="public/assets/Bistro_boss_Landing_Page_Design.png">
