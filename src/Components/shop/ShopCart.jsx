@@ -13,7 +13,7 @@ const Cart = ({ item }) => {
   const location = useLocation()
   const navigate = useNavigate()
   const axiosSecure = useAxiosSecure()
-  const [,refetch] = useCart()
+  const [, refetch] = useCart()
 
   const handleAddToCart = () => {
     // check if user is logged in or not
@@ -36,10 +36,11 @@ const Cart = ({ item }) => {
     }
     // add the cart to the database if the user is logged in
     else {
-      const cartInfo = { menuId: item._id, userEmail: user.email };
+      const { _id, ...cartProperties } = { ...item, userEmail: user.email };
+      const cartInfo = { ...cartProperties, userEmail: user.email };
       axiosSecure.post('/carts', { ...cartInfo })
         .then(res => {
-          console.log(res.data)
+          console.log(res.data);
           if (res.data.insertedId) {
             Swal.fire({
               position: "top-end",
@@ -51,7 +52,7 @@ const Cart = ({ item }) => {
             // refetch the cartInfo. it will update cart count in the navbar
             refetch();
           }
-        })
+        });
     }
   }
 

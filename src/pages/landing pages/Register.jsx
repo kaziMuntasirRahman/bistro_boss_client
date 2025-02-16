@@ -1,10 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
-import Input from "../Components/authentication/Input";
-import SubmitButton from "../Components/authentication/SubmitButton";
-import SocialLogin from "../Components/authentication/SocialLogin";
+import Input from "../../Components/authentication/Input";
+import SubmitButton from "../../Components/authentication/SubmitButton";
+import SocialLogin from "../../Components/authentication/SocialLogin";
 import { useContext, useState } from "react";
-import { AuthContext } from "../providers/AuthProvider";
-import '../styles/pan_loader.css'
+import { AuthContext } from "../../providers/AuthProvider";
+import '../../styles/pan_loader.css'
 import Swal from "sweetalert2";
 
 

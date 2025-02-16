@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router-dom";
-import PageCover from "../Components/shared/PageCover";
-import useMenu from "../hooks/useMenu";
-import Cart from "../Components/shop/ShopCart";
+import PageCover from "../../Components/shared/PageCover"
+import useMenu from "../../hooks/useMenu";
+import Cart from "../../Components/shop/ShopCart";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 

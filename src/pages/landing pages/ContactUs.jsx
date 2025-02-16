@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { FaEnvelope, FaPaperPlane, FaUser } from 'react-icons/fa';
-import PageCover from '../Components/shared/PageCover';
+import PageCover from '../../Components/shared/PageCover';
 
 const ContactUs = () => {
   return (

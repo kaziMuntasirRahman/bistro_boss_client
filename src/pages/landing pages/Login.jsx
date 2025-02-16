@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Input from "../Components/authentication/Input";
-import SubmitButton from "../Components/authentication/SubmitButton";
-import SocialLogin from "../Components/authentication/SocialLogin";
-import { AuthContext } from "../providers/AuthProvider";
+import Input from "../../Components/authentication/Input";
+import SubmitButton from "../../Components/authentication/SubmitButton";
+import SocialLogin from "../../Components/authentication/SocialLogin";
+import { AuthContext } from "../../providers/AuthProvider";
 // captcha
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
-import '../styles/pan_loader.css'
+import '../../styles/pan_loader.css'
 import Swal from "sweetalert2";
 
 

@@ -1,10 +1,11 @@
 import { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { AuthContext } from "../../providers/AuthProvider";
-import Swal from "sweetalert2";
-import { CiShoppingCart } from "react-icons/ci";
 import { FaCartShopping } from "react-icons/fa6";
-import useCart from '../../hooks/useCart'
+import { Link, NavLink } from "react-router-dom";
+import Swal from "sweetalert2";
+import useCart from '../../hooks/useCart';
+import { AuthContext } from "../../providers/AuthProvider";
+import TextLogo from "./TextLogo";
+import { Helmet } from "react-helmet-async";
 
 const navLinks = [
   {
@@ -108,10 +109,7 @@ const Navbar = () => {
             )}
           </ul>
         </div>
-        <Link to="/" className="flex flex-col gap-0">
-          <div className="text-white text-[32px] font-black font-Cinzel">BISTRO BOSS</div>
-          <div className="text-white text-2xl font-bold font-Cinzel tracking-[9.12px]">Restaurant</div>
-        </Link>
+        <TextLogo />
       </div>
       {/* <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -133,12 +131,12 @@ const Navbar = () => {
               }
             >{navLink.title}</NavLink>
           )}
-          <div className="relative">
+          <Link to='/dashboard/my-cart' className="relative">
             {/* <img className="h-[43px] mr-5" src="/assets/icons/shopping-cart-favicon.png" /> */}
             {/* <CiShoppingCart className="text-5xl text-green-500 mr-5 font-bold" /> */}
             <FaCartShopping className="text-5xl text-green-500 mr-5 font-bold " />
             <p className=" bg-red-600 text-lg w-min  text-white  px-2 rounded-full absolute -top-2 left-4">{cart.length}</p>
-          </div>
+          </Link>
         </ul>
         {
           user ?

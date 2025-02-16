@@ -1,14 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
-import Root from "../pages/Root";
-import Home from "../pages/Home";
-import ErrorPage from "../pages/ErrorPage";
-import Menu from "../pages/Menu";
-import OurShop from "../pages/OurShop";
-import ContactUs from "../pages/ContactUs";
-import Dashboard from "../pages/Dashboard";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import PrivateRouter from "../pages/PrivateRouter";
+import DashBoardErrorPage from "../pages/dashboard/shared/DashBoardErrorPage";
+import Dashboard from '../pages/dashboard/user dashboard/Dashboard';
+import DashboardHome from '../pages/dashboard/user dashboard/Home';
+import ContactUs from "../pages/landing pages/ContactUs";
+import Home from "../pages/landing pages/Home";
+import Login from "../pages/landing pages/Login";
+import Menu from "../pages/landing pages/Menu";
+import OurShop from "../pages/landing pages/OurShop";
+import Register from "../pages/landing pages/Register";
+import Root from "../pages/landing pages/Root";
+import ErrorPage from "../pages/shared/ErrorPage";
+import MyCart from "../pages/dashboard/user dashboard/MyCart";
 
 const router = createBrowserRouter([
   {
@@ -47,11 +49,20 @@ const router = createBrowserRouter([
     ]
   },
   {
-    path: '/dashboard',
+    path: 'dashboard',
     element: <Dashboard />,
-    errorElement: <ErrorPage />,
-    children: []
-  },
-])
+    errorElement: <DashBoardErrorPage />, // this error element isn't workin'
+    children: [
+      {
+        path: '',
+        element: <DashboardHome />
+      },
+      {
+        path: 'my-cart',
+        element: <MyCart />
+      }
+    ]
+  }
+]);
 
 export default router;

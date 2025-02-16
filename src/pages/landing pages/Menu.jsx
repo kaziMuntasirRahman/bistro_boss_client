@@ -1,8 +1,8 @@
 import { Helmet } from "react-helmet-async";
-import OfferedMenu from "../Components/menu/OfferedMenu";
-import SectionTemplate from "../Components/menu/SectionTemplate";
-import PageCover from "../Components/shared/PageCover";
-import useMenu from "../hooks/useMenu";
+import OfferedMenu from "../../Components/menu/OfferedMenu";
+import SectionTemplate from "../../Components/menu/SectionTemplate";
+import PageCover from "../../Components/shared/PageCover";
+import useMenu from "../../hooks/useMenu";
 
 const Menu = () => {
   const [menu, loading] = useMenu()
