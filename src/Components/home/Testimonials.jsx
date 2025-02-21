@@ -68,17 +68,18 @@ const Slider = ({ array }) => {
       modules={[Navigation]}
       className="mySwiper w-full">
       {
-        array.map((critic) =>
-          <SwiperSlide key={critic.id}>
+        array.map((critic, index) =>
+          <SwiperSlide key={index}>
             <div className='flex flex-col items-center'>
+              {/* set star rating */}
               <section className="flex gap-[5px] items-center justify-center mx-auto">
                 {
-                  Array(critic.rating).fill().map((index) =>
+                  Array(critic.rating).fill().map((_, index) =>
                     <img src="/assets/icons/filled_star.png" key={index} />
                   )
                 }
                 {
-                  Array(5 - critic.rating).fill().map((index) =>
+                  Array(5 - critic.rating).fill().map((_, index) =>
                     <img src="/assets/icons/empty_star.png" key={index} />
                   )
                 }

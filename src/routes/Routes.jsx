@@ -11,6 +11,8 @@ import Register from "../pages/landing pages/Register";
 import Root from "../pages/landing pages/Root";
 import ErrorPage from "../pages/shared/ErrorPage";
 import MyCart from "../pages/dashboard/user dashboard/MyCart";
+import AddReview from "../pages/dashboard/user dashboard/AddReview";
+import AllUsers from "../pages/dashboard/admin dashboard/AllUsers";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +62,15 @@ const router = createBrowserRouter([
       {
         path: 'my-cart',
         element: <MyCart />
+      },
+      {
+        path: 'add-review',
+        element: <AddReview />
+      },
+      // admin routes
+      {
+        path: 'admin/all-users',
+        element: <AllUsers />
       }
     ]
   }

@@ -6,7 +6,7 @@ const ChefRecommends = () => {
       <SectionHeading heading="Chef Recommends" title="Should Try" />
       <section className="flex justify-between">
         {
-          Array(3).fill().map((index) =>
+          Array(3).fill().map((_,index) =>
             <Cart
               key={index}
               img="/assets/home/slide5.jpg"

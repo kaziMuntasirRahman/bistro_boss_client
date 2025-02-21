@@ -6,14 +6,15 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import '../../styles/pan_loader.css'
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 
 const Register = () => {
-
+  const { user, loading, createUser } = useContext(AuthContext)
+  const axiosPublic = useAxiosPublic()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const { user, loading, createUser } = useContext(AuthContext)
   const navigate = useNavigate()
 
   const handleRegister = async (e) => {
@@ -22,15 +23,28 @@ const Register = () => {
     try {
       const result = await createUser(name, email, password)
       if (result.user) {
-        setTimeout(() => navigate('/'), (200))
         // navigate('/');
         Swal.fire({
           position: "center",
           icon: "success",
           title: "You've successfully Logged In.",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 2500,
         });
+        setTimeout(() => navigate('/'), (1500))
+        const modifiedUser = {
+          name, email, photoURL: result.user?.photoURL
+        }
+        axiosPublic.post('/users', modifiedUser)
+          .then(res => {
+            if (res.data.insertedId) {
+              console.log("User info successfully added to Database.");
+            } else if (res.data.existUser) {
+              console.log(res.data.message)
+            } else {
+              console.log("Failed to insert user data.")
+            }
+          })
       }
       else {
         Swal.fire({

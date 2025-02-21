@@ -49,10 +49,19 @@ const Cart = ({ item }) => {
               showConfirmButton: false,
               timer: 1500
             });
-            // refetch the cartInfo. it will update cart count in the navbar
+            // refetch the cartInfo. it will update cart count in the navbar immediately
             refetch();
           }
-        });
+        })
+        .catch(error => {
+          console.log("error occurred")
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Oops! Something went wrong while adding to the cart.",
+            showConfirmButton: true
+          })
+        })
     }
   }
 

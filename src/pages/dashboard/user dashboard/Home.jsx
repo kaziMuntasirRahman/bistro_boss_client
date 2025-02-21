@@ -1,11 +1,13 @@
+import { useContext } from "react";
 import { BiPhoneCall } from "react-icons/bi";
 import { CiShop } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
 import { IoCalendar, IoCart, IoWalletOutline, IoWalletSharp } from "react-icons/io5";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 
 const Home = () => {
-
+  const { user } = useContext(AuthContext)
   const headItems = [
     {
       name: "Menu",
@@ -53,8 +55,8 @@ const Home = () => {
       <section className="w-full h-[470px] flex flex-grow">
         {/* profile info */}
         <div className="w-1/2 h-full bg-orange-100 border-r-2 border-[#d1a054] flex flex-col gap-12 items-center justify-center">
-          <img src="" className="size-[198px] rounded-full border-2 border-[#d1a054]" />
-          <h3 className="text-[#151515] text-[32px] font-semibold font-['Cinzel']">Awlad Hossain</h3>
+          <img src={user?.photoURL || ""} className="size-[198px] rounded-full border-2 border-[#d1a054]" />
+          <h3 className="text-[#151515] text-[32px] font-semibold font-['Cinzel']">{user?.displayName}</h3>
         </div>
         {/* profile stats */}
         <div className="w-1/2 h-full bg-yellow-100 flex flex-col justify-start items-start pl-14 pt-16 gap-2">

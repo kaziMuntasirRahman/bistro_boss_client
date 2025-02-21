@@ -43,8 +43,6 @@ const navLinks = [
 const Navbar = () => {
   const { user, logOut, loading } = useContext(AuthContext);
   const [cart] = useCart();
-  console.log(cart)
-
   const handleLogout = async () => {
     try {
       const result = await logOut()

@@ -1,17 +1,21 @@
 import { HiMiniHome } from "react-icons/hi2";
 import TextLogo from "../../../Components/shared/TextLogo";
 import { IoCalendar } from "react-icons/io5";
-import { FaCreditCard } from "react-icons/fa";
+import { FaBook, FaCreditCard, FaUsers } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import { MdOutlinePermContactCalendar, MdReviews, MdShoppingBag } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { IoIosMail, IoMdMenu } from "react-icons/io";
+import { useEffect, useState } from "react";
+import { GiForkKnifeSpoon } from "react-icons/gi";
+import { RiMenuFold2Fill } from "react-icons/ri";
 
-const navLinks = [
+const userNavLinks = [
   {
     title: "User Home",
     icon: <HiMiniHome />,
-    link: '/dashboard'
+    link: '/dashboard',
+    end: true
   },
   {
     title: "Reservation",
@@ -40,6 +44,35 @@ const navLinks = [
   }
 ];
 
+const adminNavLinks = [
+  {
+    title: "Admin Home",
+    icon: <HiMiniHome />,
+    link: '/dashboard/admin',
+    end: true
+  },
+  {
+    title: "Add Items",
+    icon: <GiForkKnifeSpoon />,
+    link: '/dashboard/admin/add-items'
+  },
+  {
+    title: "Manage Items",
+    icon: <RiMenuFold2Fill />,
+    link: '/dashboard/admin/manage-items'
+  },
+  {
+    title: "Manage Bookings",
+    icon: <FaBook />,
+    link: '/dashboard/admin/manage-bookings'
+  },
+  {
+    title: "All Users",
+    icon: <FaUsers />,
+    link: '/dashboard/admin/all-users'
+  }
+];
+
 const landingPageNavLinks = [
   {
     title: "Home",
@@ -64,24 +97,35 @@ const landingPageNavLinks = [
 ]
 
 const SideNavBar = () => {
+  // TODO: remove this state after first admin is set 
+  const isAdmin = true;
+  const [showedNavLinks, setShowedNavLinks] = useState([]) 
+  useEffect(()=>{
+    if(isAdmin){
+      setShowedNavLinks(adminNavLinks)
+    }else{
+      setShowedNavLinks(userNavLinks)
+    }
+  }, [isAdmin])
   return (
     <div className="w-72 min-h-full px-2 md:px-5 py-12 flex flex-col bg-[#d1a054]">
       {/* logo */}
       <div className="mb-[60px]">
         <TextLogo textBlack shortLogo />
       </div>
-      {/* dashboard navlinks */}
+      {/* user dashboard navlinks */}
       <nav className="flex flex-col gap-6 p-2.5">
         {
-          navLinks.map((navlink, index) =>
+          showedNavLinks.map((navlink, index) =>
             <NavLink
               key={index}
               to={navlink.link}
+              end={navlink.end}
               className={({ isActive, isPending, isTransitioning }) =>
                 [
-                  isPending ? "" : "",
+                  isPending ? " text-red-500 " : "  ",
                   isActive ? " text-white " : " text-[#151515] hover:text-white ",
-                  isTransitioning ? "" : "",
+                  isTransitioning ? " text-blue-500 " : "  ",
                 ].join("flex items-center gap-2 text-base font-bold font-['Cinzel'] hover:ml-4 hover:scale-110 transition-all duration-200 ease-in-out")
               }
             >
@@ -105,18 +149,8 @@ const SideNavBar = () => {
           )
         }
       </nav>
-      {/* landing page navlinks */}
     </div >
   );
 };
 
 export default SideNavBar;
-
-
-//     className={({ isActive, isPending }) =>
-//   isActive
-//     ? "activeNavLink"
-//     : isPending
-//       ? "pendingNavLink"
-//       : "inActiveNavLink"
-// }

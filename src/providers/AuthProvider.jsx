@@ -1,28 +1,41 @@
-import { createContext, useEffect, useState } from "react";
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
-import auth from '../firebase/firebase.config'
+import { createContext, useEffect, useState } from "react";
+import auth from '../firebase/firebase.config';
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true)
+  const axiosPublic = useAxiosPublic()
 
   // on auth state changed manage
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        console.log("User is present as: " + currentUser.displayName)
+        console.log("User is present as: " + currentUser.displayName);
         // console.log(currentUser)
+        // jwt part
+        const userInfo = { email: currentUser.email }
+        axiosPublic.post('/jwt', userInfo)
+          .then(res => {
+            if (res.data.token) {
+              localStorage.setItem('access-token', res.data.token)
+            }
+          })
+
       } else {
         setUser(null)
         console.log("User is absent");
+        // jwt part
+        localStorage.removeItem('access-token')
       }
       setLoading(false);
     })
     return () => unsubscribe();
-  }, [])
+  }, [user])
 
   // create new user
   const createUser = async (name, email, password) => {
@@ -59,6 +72,7 @@ const AuthProvider = ({ children }) => {
     setLoading(true)
     try {
       await signOut(auth);
+      console.clear()
       return true;
     } catch (err) {
       console.log(err);

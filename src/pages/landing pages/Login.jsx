@@ -8,6 +8,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 import '../../styles/pan_loader.css'
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 
 const Login = () => {
@@ -15,6 +16,7 @@ const Login = () => {
   const [password, setPassword] = useState("")
   const [captcha, setCaptcha] = useState("");
   const [captchaError, setCaptchaError] = useState("");
+  const axiosPublic = useAxiosPublic()
 
   const { loading, logIn } = useContext(AuthContext);
   const navigate = useNavigate()
@@ -42,7 +44,6 @@ const Login = () => {
     try {
       const result = await logIn(email, password)
       if (result.user) {
-        setTimeout(() => navigate(originalLocation), (200))
         Swal.fire({
           position: "center",
           icon: "success",
@@ -50,6 +51,22 @@ const Login = () => {
           showConfirmButton: false,
           timer: 2000,
         });
+        setTimeout(() => navigate(originalLocation), 1500)
+        const modifiedUser = {
+          name: result.user?.displayName,
+          email: result.user?.email,
+          photoURL: result.user?.photoURL
+        }
+        axiosPublic.post('/users', modifiedUser)
+          .then(res => {
+            if (res.data.insertedId) {
+              console.log("User successfully added to Database.");
+            } else if (res.data.existUser) {
+              console.log(res.data.message)
+            } else {
+              console.log("Failed to insert user data.")
+            }
+          })
       }
       else {
         Swal.fire({
