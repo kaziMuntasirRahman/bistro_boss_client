@@ -40,7 +40,7 @@ const Login = () => {
       }
       return;
     }
-    // login in process
+    // login process
     try {
       const result = await logIn(email, password)
       if (result.user) {
@@ -51,7 +51,8 @@ const Login = () => {
           showConfirmButton: false,
           timer: 2000,
         });
-        setTimeout(() => navigate(originalLocation), 1500)
+        // console.log(originalLocation)
+        setTimeout(() => navigate(originalLocation), 1000)
         const modifiedUser = {
           name: result.user?.displayName,
           email: result.user?.email,

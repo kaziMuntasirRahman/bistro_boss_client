@@ -1,4 +1,7 @@
 import axios from "axios";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 
 const axiosSecure = axios.create({
   baseURL: 'http://localhost:5000/',
@@ -7,24 +10,39 @@ const axiosSecure = axios.create({
 })
 
 const useAxiosSecure = () => {
-  axiosSecure.interceptors.request.use((config) => {
-    const token = localStorage.getItem('access-token');
-    // console.log('request stopped by interceptor...');
-    config.headers.authorization = `bearer ${token}`;
-    // config.headers= { authorization: `bearer ${localStorage.getItem('access-token')}` };
-    console.log("config", config)
-    return config;
-  }, (error) => {
-    // do something with request error
-    return Promise.reject(error)
-  })
+  const navigate = useNavigate();
+  const { logOut } = useContext(AuthContext);
 
-  // intercepts 401 and 403 status
-  axiosSecure.interceptors.response.use((response) => {
-    return response
-  }, (error) => {
-    return Promise.reject(error)
-  })
+  //*****/ This request interceptor runs before each request is sent.
+  axiosSecure.interceptors.request.use(
+    (config) => {
+      const token = localStorage.getItem('access-token');
+      // console.log('request stopped by interceptor...');
+      config.headers.authorization = `bearer ${token}`;
+      // config.headers= { authorization: `bearer ${localStorage.getItem('access-token')}` };
+      // console.log("config", config)
+      return config;
+    },
+    (error) => {
+      // do something with request error
+      return Promise.reject(error)
+    })
+
+  // //*****/ This response interceptor runs after each response is received from the server.
+  // axiosSecure.interceptors.response.use(
+  //   (response) => {
+  //     return response
+  //   },
+  //   async (error) => {
+  //     const status = error.response.status;
+  //     console.log("Error code in the interceptor: ", status);
+  //     // intercepts 401 and 403 status
+  //     if (status === 401 || status === 403) {
+  //       await logOut();
+  //       navigate('/login');
+  //     }
+  //     return Promise.reject(error)
+  //   })
 
 
 

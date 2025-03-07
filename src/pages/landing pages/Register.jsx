@@ -29,9 +29,9 @@ const Register = () => {
           icon: "success",
           title: "You've successfully Logged In.",
           showConfirmButton: false,
-          timer: 2500,
+          timer: 2000,
         });
-        setTimeout(() => navigate('/'), (1500))
+        setTimeout(() => navigate('/'), (1000))
         const modifiedUser = {
           name, email, photoURL: result.user?.photoURL
         }

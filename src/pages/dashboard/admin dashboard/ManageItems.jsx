@@ -1,31 +1,26 @@
-import { RiDeleteBin5Fill } from "react-icons/ri";
-import SectionHead from "../../../Components/dashboard/SectionHead";
-import useCart from "../../../hooks/useCart";
-import Swal from "sweetalert2";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Helmet } from "react-helmet-async";
+import SectionHead from "../../../Components/dashboard/SectionHead";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { FaRegEdit, FaUsers } from "react-icons/fa";
+import { RiAdminFill, RiDeleteBin5Fill } from "react-icons/ri";
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
+import { useQuery } from "@tanstack/react-query";
+import useMenu from "../../../hooks/useMenu";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
-const MyCart = () => {
-  const [cart, refetch] = useCart();
-  const axiosSecure = useAxiosSecure();
-  
-  const totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
-
-    // // State to store the total price
-    // const [totalPrice, setTotalPrice] = useState(0);
-
-    // useEffect(() => {
-    //   // Calculate total price whenever cart changes
-    //   const price = cart.reduce((sum, item) => sum + item.price, 0);
-    //   setTotalPrice(price);
-    // }, [cart]);
+const ManageItems = () => {
+  const axiosSecure = useAxiosSecure()
+  const [menu, isMenuLoading, refetch] = useMenu()
 
 
-  const handleDelete = (id) => {
+  const handleDelete = (item) => {
+    const { name, _id } = item;
+    console.log(_id)
     Swal.fire({
       title: "Are you sure?",
-      text: "This item will be removed from your cart",
+      text: name + " will be removed",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -33,19 +28,19 @@ const MyCart = () => {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/carts/${id}`)
+        axiosSecure.delete(`/menu/${_id}`)
           .then(res => {
-            refetch();
             if (res.data.deletedCount > 0) {
               Swal.fire({
-                position: "top-start",
+                position: "center",
                 title: "Deleted!",
-                text: "The Items has been removed.",
+                text: "The user has been removed.",
                 icon: "success",
                 timer: 1000,
                 showCloseButton: false,
                 showConfirmButton: false
               });
+              refetch();
             } else {
               Swal.fire({
                 // position: "top-end",
@@ -63,19 +58,13 @@ const MyCart = () => {
 
   return (
     <div>
-      <SectionHead title="My Cart" heading="Wanna Add More?" />
       <Helmet>
-        <title>Dashboard | My Cart</title>
+        <title>Dashboard | Manage Items</title>
       </Helmet>
+      <SectionHead title="Hurry Up!!" heading="Manage All Items" />
       <div className="overflow-x-auto">
         <section className="bg-white p-12">
-          <div className="w-full flex justify-between mb-9">
-            <div className="text-[#151515] text-[32px] font-bold font-['Cinzel']">Total orders: <strong>{cart.length}</strong></div>
-            <div className="text-[#151515] text-[32px] font-['Cinzel']">
-              total price: <span className="font-bold">${totalPrice}</span>
-            </div>
-            <button className="btn h-[55px] px-[17px] py-3.5 bg-[#d1a054] rounded-lg justify-start items-start gap-2.5 inline-flex text-white text-xl font-bold font-['Cinzel'] hover:text-black">Pay</button>
-          </div>
+          <div className="text-[#151515] text-[32px] font-bold font-['Cinzel'] mb-9">Total Item: <strong>{menu.length}</strong></div>
           <table className="table">
             {/* table head */}
             <thead>
@@ -84,7 +73,7 @@ const MyCart = () => {
                 <th className="">{"Item Image".toUpperCase()}</th>
                 <th className="">{"Item Name".toUpperCase()}</th>
                 <th className="">{"Price".toUpperCase()}</th>
-                <th className="rounded-tr-[15px]">{"Action".toUpperCase()}</th>
+                <th colSpan={2} className="rounded-tr-[15px] text-center">{"Actions".toUpperCase()}</th>
               </tr>
             </thead>
 
@@ -92,14 +81,20 @@ const MyCart = () => {
             <tbody>
               {/* item showcase */}
               {
-                cart.map((item, index) =>
-                  <tr key={index} className={`${index % 2 == 0 ? "bg-yellow-500/15" : "bg-yellow-500/0"} hover:bg-[#d1a054] hover:text-white transition-all duration-300 ease-in-out text-center text-lg`}>
+                menu.map((item, index) =>
+                  <tr key={index} className={`${index % 2 == 0 ? "bg-yellow-200/30" : "bg-yellow-200/0"} hover:bg-[#d1a054] hover:text-white transition-colors duration-300 ease-in-out text-center text-lg`}>
                     <th>{index + 1}</th>
-                    <td><img src={item.image} className="size-[75px] object-cover rounded-md mx-auto" alt="" /></td>
+                    {/* <td><p className="font-['Inter']">item image</p></td> */}
+                    <td><img src={item.image} className="size-[75px] object-cover mx-auto" /></td>
                     <td><p className="font-['Inter']">{item.name}</p></td>
                     <td><p className="font-['Inter']">${item.price}</p></td>
-                    <td className=" h-full ">
-                      <button onClick={() => handleDelete(item._id)} className="flex items-center justify-center h-full w-full">
+                    <td className="text-3xl flex items-center justify-center my-2">
+                      <button className="bg-[#d1a054] p-2 text-white rounded-sm tooltip tooltip-left" data-tip="update">
+                        <FaRegEdit />
+                      </button>
+                    </td>
+                    <td>
+                      <button onClick={() => handleDelete(item)} className="flex items-center justify-center h-full w-full tooltip tooltip-left" data-tip="delete">
                         <RiDeleteBin5Fill className="btn border-none text-2xl text-white bg-red-800 hover:text-red-800 size-[50px] p-3 rounded-lg" />
                       </button>
                     </td>
@@ -107,16 +102,16 @@ const MyCart = () => {
                 )}
               {/* show message if the cart is empty */}
               {
-                !cart.length ?
+                !menu.length ?
                   <tr className="">
-                    <td colSpan={5} className="text-[#151515] text-[32px] font-medium font-['Cinzel'] text-center py-28">Your Cart is Empty.&nbsp;
-                      <Link to='/shop' className="btn-link">Add Item Now.</Link>
+                    <td colSpan={5} className="text-[#151515] text-[32px] font-medium font-['Cinzel'] text-center py-28">No Recipe is Available.&nbsp;
+                      <Link to='/dashboard/admin/add-items' className="btn-link">Add Recipe Now.</Link>
                     </td>
                   </tr>
                   :
                   <tr className="">
                     <td colSpan={5} className="text-2xl font-medium font-['Cinzel'] text-center pt-14">
-                      <Link to='/shop' className="btn-link">Add more item</Link>
+                      <Link to='/dashboard/admin/add-items' className="btn-link">Add more Recipe.</Link>
                     </td>
                   </tr>
               }
@@ -124,8 +119,8 @@ const MyCart = () => {
           </table>
         </section>
       </div>
-    </div >
+    </div>
   );
 };
 
-export default MyCart;
+export default ManageItems;

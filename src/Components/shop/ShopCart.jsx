@@ -69,7 +69,7 @@ const Cart = ({ item }) => {
     <div className="w-[424px] h-[544px] bg-[#f3f3f3] flex flex-col" >
 
       <div className="w-full h-[300px] overflow-hidden relative">
-        <img src={image} className="w-full h-full hover:scale-125 transition-all ease-in-out duration-150" />
+        <img src={image} className="w-full h-full hover:scale-125 transition-all ease-in-out duration-150 object-cover" />
         <div className="py-[11px] px-[22px] bg-gray-900 absolute top-5 right-5">
           <h3 className="text-white font-semibold font-['Inter']">${price}</h3>
           {/* <h3 className="text-white font-['Inter']">&#2547;{price}</h3> */}

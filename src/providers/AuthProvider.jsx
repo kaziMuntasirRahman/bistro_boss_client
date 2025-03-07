@@ -35,7 +35,7 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
     })
     return () => unsubscribe();
-  }, [user])
+  }, [axiosPublic])
 
   // create new user
   const createUser = async (name, email, password) => {
@@ -72,7 +72,7 @@ const AuthProvider = ({ children }) => {
     setLoading(true)
     try {
       await signOut(auth);
-      console.clear()
+      // console.clear()
       return true;
     } catch (err) {
       console.log(err);

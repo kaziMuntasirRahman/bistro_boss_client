@@ -3,13 +3,13 @@ import SectionHead from "../../../Components/dashboard/SectionHead";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
-import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FaUsers } from "react-icons/fa";
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const AllUsers = () => {
-  // const [users, setUsers] = useState([])
+  const { user } = useContext(AuthContext)
   const axiosSecure = useAxiosSecure();
 
   const { data: users = [], refetch } = useQuery({
@@ -43,7 +43,7 @@ const AllUsers = () => {
               Swal.fire({
                 position: "center",
                 title: "Deleted!",
-                text: "Your file has been deleted.",
+                text: "The user has been removed.",
                 icon: "success",
                 timer: 1000,
                 showCloseButton: false,
@@ -93,14 +93,14 @@ const AllUsers = () => {
             <tbody>
               {/* item showcase */}
               {
-                users.map((user, index) =>
-                  <tr key={index} className={`${index % 2 == 0 ? "bg-yellow-200/30" : "bg-yellow-200/0"} hover:bg-yellow-200 transition-all duration-300 ease-in-out text-center text-lg`}>
+                users.map((User, index) =>
+                  <tr key={index} className={`${User.email === user.email? 'bg-cyan-200' : index % 2 == 0 ? "bg-yellow-200/30" : "bg-yellow-200/0"} hover:bg-yellow-200 transition-all duration-300 ease-in-out text-center text-lg`}>
                     <th>{index + 1}</th>
-                    <td><p className="text-neutral-500 font-['Inter']">{user.name}</p></td>
-                    <td><p className="text-neutral-500 font-['Inter']">{user.email}</p></td>
+                    <td><p className="text-neutral-500 font-['Inter']">{User.name}</p></td>
+                    <td><p className="text-neutral-500 font-['Inter']">{User.email}</p></td>
                     <td className="text-3xl flex items-center justify-center my-2">
                       {
-                        user.role === 'admin' ?
+                        User.role === 'admin' ?
                           <button className="tooltip tooltip-left" data-tip="Admin">
                             < RiAdminFill />
                           </button>
@@ -111,7 +111,7 @@ const AllUsers = () => {
                       }
                     </td>
                     <td>
-                      <button onClick={() => handleDelete(user)} className="flex items-center justify-center h-full w-full">
+                      <button onClick={() => handleDelete(User)} className="flex items-center justify-center h-full w-full">
                         <RiDeleteBin5Fill className="btn border-none text-2xl text-white bg-red-800 hover:text-red-800 size-[50px] p-3 rounded-lg" />
                       </button>
                     </td>
